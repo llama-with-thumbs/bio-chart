@@ -12,6 +12,10 @@ def rotate_image(input_path, angle=2):
             # Calculate the rotation matrix
             rotation_matrix = cv2.getRotationMatrix2D((width / 2, height / 2), -angle, 1)
 
+            #flip 180 
+            rotation_matrix = cv2.getRotationMatrix2D((width / 2, height / 2), -180, 1)
+
+
             # Perform the rotation
             rotated_image = cv2.warpAffine(image, rotation_matrix, (width, height))
 
