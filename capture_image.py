@@ -15,9 +15,10 @@ def capture_image(output_directory='captured_images'):
 
         # ISO value to set (e.g., ISO 100)
         iso_value = 50
-
+        exposure_value = "1/100"
+        
         # Construct the fswebcam command with ISO setting
-        subprocess.run(["fswebcam", "-r", "2592x1944", "-S", str(iso_value), "--no-banner", image_path])
+        subprocess.run(["fswebcam", "-r", "2592x1944", "-S", str(iso_value), "--no-banner", f"Exposure={exposure_value}", image_path])
 
 
         # Return the path of the captured image
