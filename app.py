@@ -9,9 +9,9 @@ from update_latest_image import update_latest_image
 interval_seconds = 10 * 60  # 10 minutes * 60 seconds/minute
 
 # Define the coordinates for cropping
-width = 475
-height = 550
-y=890
+width = 675
+height = 850
+y=390
 
 # Define the rotation angle
 rotation_angle = -2.5  # Rotation angle in degrees
@@ -22,16 +22,10 @@ while True:
     rotate_image(image_path, rotation_angle)
 
     # Call the cut_and_save_rectangle function for each image
-    image_path_a = cut_and_save_rectangle(image_path, 1010, y , width, height, "A_B")
-    image_path_b = cut_and_save_rectangle(image_path, 1660, y , width, height, "B_B")
-    image_path_c = cut_and_save_rectangle(image_path, 300, y , width, height, "C_B")
+    image_path_a = cut_and_save_rectangle(image_path, 1050, y , width, height, "A_B")
 
     update_latest_image(image_path_a)
-    update_latest_image(image_path_b)
-    update_latest_image(image_path_c)
 
     upload_image_to_firebase(image_path_a, image_path_a)
-    upload_image_to_firebase(image_path_b, image_path_b)
-    upload_image_to_firebase(image_path_c, image_path_c)
 
     time.sleep(interval_seconds)
