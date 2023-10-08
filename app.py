@@ -9,8 +9,8 @@ from update_latest_image import update_latest_image
 interval_seconds = 10 * 60  # 10 minutes * 60 seconds/minute
 
 # Define the coordinates for cropping
-width = 875
-height = 1000
+width = 1000
+height = 900
 y=390
 
 # Define the rotation angle
@@ -22,7 +22,7 @@ while True:
     rotate_image(image_path, rotation_angle)
 
     # Call the cut_and_save_rectangle function for each image
-    image_path_a = cut_and_save_rectangle(image_path, 900, y , width, height, "A_B")
+    image_path_a = cut_and_save_rectangle(image_path, 800, y , width, height, "A_B")
 
     update_latest_image(image_path_a)
 
