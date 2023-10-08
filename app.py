@@ -22,7 +22,7 @@ while True:
     rotate_image(image_path, rotation_angle)
 
     # Call the cut_and_save_rectangle function for each image
-    image_path_a = cut_and_save_rectangle(image_path, 850, y , width, height, "A_B")
+    image_path_a = cut_and_save_rectangle(image_path, 750, y , width, height, "A_B")
 
     update_latest_image(image_path_a)
 
