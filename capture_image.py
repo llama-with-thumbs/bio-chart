@@ -13,9 +13,7 @@ def capture_image(output_directory='captured_images'):
         image_filename = f"captured_image_{timestamp}.jpg"
         image_path = os.path.join(output_directory, image_filename)
 
-        # ISO value to set (e.g., ISO 100)
-        iso_value = 50
-        exposure_value = "1/50"
+        exposure_value = "1/30"
         
         # Construct the command with the exposure setting
         command = ["fswebcam", "-r", "2592x1944", "--no-banner", "--set", f"Exposure={exposure_value}", image_path]
