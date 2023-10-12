@@ -5,8 +5,8 @@ from rotate_image import rotate_image
 from cut_and_save_rectangle import cut_and_save_rectangle
 from update_latest_image import update_latest_image
 
-# Define the interval in seconds (10 minutes)
-interval_seconds = 10 * 60  # 10 minutes * 60 seconds/minute
+# Define the interval in seconds (5 minutes)
+interval_seconds = 5 * 60  # 5 minutes * 60 seconds/minute
 
 # Define the coordinates for cropping
 width = 1100
