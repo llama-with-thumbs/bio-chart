@@ -21,12 +21,12 @@ coordinates_c = [1700, 868 ,425 ,530]
 rotation_angle = 0  # Rotation angle in degrees
 
 # Define chamber name
-chamber = "CHA-18E9A7"
+chamber = "CHA-18E9A6"
 
 # Define flasks names
-flask_a = "FLA-99606EE"
-flask_b = "FLA-6A7F044"
-flask_c = "FLA-5B4CDCC"
+flask_a = "FLA-99606"
+flask_b = "FLA-6A7F0"
+flask_c = "FLA-5B4CD"
 
 while True:
     # Capture an image and get its path
