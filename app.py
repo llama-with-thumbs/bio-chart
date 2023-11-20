@@ -13,8 +13,6 @@ import re
 
 folder_path = "captured_images/C"
 
-
-
 # Define the coordinates for cropping
 # x, y, width, height
 coordinates_a = [410, 868, 425, 530]
@@ -37,7 +35,7 @@ print(f"befor for cikle")
 # Iterate through the folder
 for root, dirs, files in os.walk(folder_path):
     for i, file_name in enumerate(files, start=1):
-        if i % 380 == 0:
+        if i % 38 == 0:
             file_path = os.path.join(root, file_name)
 
             # Define the regular expression pattern to match the date
