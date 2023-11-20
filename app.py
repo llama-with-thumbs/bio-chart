@@ -8,8 +8,12 @@ from upload_raw_image import upload_raw_image
 from datetime import datetime
 from calculate_mean_intensities import calculate_mean_intensities
 
-# Define the interval in seconds (30 minutes)
-interval_seconds = 30 * 60  # 30 minutes * 60 seconds/minute
+import os
+import re
+
+folder_path = "captured_images\\A"
+
+
 
 # Define the coordinates for cropping
 # x, y, width, height
@@ -28,27 +32,47 @@ flask_a = "FLA-99606"
 flask_b = "FLA-6A7F0"
 flask_c = "FLA-5B4CD"
 
-while True:
-    # Capture an image and get its path
-    timestamp = datetime.now().isoformat()
 
-    image_path = capture_image(timestamp)
 
-    rotate_image(image_path, rotation_angle)
+# Iterate through the folder
+for root, dirs, files in os.walk(folder_path):
+    for i, file_name in enumerate(files, start=1):
+        if i % 38 == 0:
+            file_path = os.path.join(root, file_name)
 
-    upload_raw_image(image_path, chamber, timestamp)
+            # Define the regular expression pattern to match the date
+            pattern = re.compile(r"\d{4}-\d{2}-\d{2}_\d{2}-\d{2}-\d{2}")
 
-    # # Call the cut_and_save_rectangle function for each image
-    snippet_path_a = cut_and_save_snippet(image_path, coordinates_a, flask_a, chamber)
-    snippet_path_b = cut_and_save_snippet(image_path, coordinates_b, flask_b, chamber)
-    snippet_path_c = cut_and_save_snippet(image_path, coordinates_c, flask_c, chamber)
+            # Find the match in the filename
+            match = pattern.search(file_name)
+            date_str = match.group()
+            date_time_obj = datetime.strptime(date_str, "%Y-%m-%d_%H-%M-%S")
 
-    # update_latest_image(image_path_a)
-    # update_latest_image(image_path_b)
-    # update_latest_image(image_path_c)
+            # Convert the datetime object to ISO format
+            iso_format_date = date_time_obj.isoformat()
 
-    upload_snippet_to_firebase(snippet_path_a, flask_a, chamber, timestamp, calculate_mean_intensities(snippet_path_a))
-    upload_snippet_to_firebase(snippet_path_b, flask_b, chamber, timestamp, calculate_mean_intensities(snippet_path_b))
-    upload_snippet_to_firebase(snippet_path_c, flask_c, chamber, timestamp, calculate_mean_intensities(snippet_path_c))
+            upload_snippet_to_firebase(file_path, flask_a, chamber, iso_format_date, calculate_mean_intensities(file_path))
 
-    time.sleep(interval_seconds)
+# while True:
+#     # Capture an image and get its path
+#     timestamp = datetime.now().isoformat()
+
+#     image_path = capture_image(timestamp)
+
+#     rotate_image(image_path, rotation_angle)
+
+#     upload_raw_image(image_path, chamber, timestamp)
+
+#     # # Call the cut_and_save_rectangle function for each image
+#     snippet_path_a = cut_and_save_snippet(image_path, coordinates_a, flask_a, chamber)
+#     snippet_path_b = cut_and_save_snippet(image_path, coordinates_b, flask_b, chamber)
+#     snippet_path_c = cut_and_save_snippet(image_path, coordinates_c, flask_c, chamber)
+
+#     # update_latest_image(image_path_a)
+#     # update_latest_image(image_path_b)
+#     # update_latest_image(image_path_c)
+
+#     upload_snippet_to_firebase(snippet_path_a, flask_a, chamber, timestamp, calculate_mean_intensities(snippet_path_a))
+#     upload_snippet_to_firebase(snippet_path_b, flask_b, chamber, timestamp, calculate_mean_intensities(snippet_path_b))
+#     upload_snippet_to_firebase(snippet_path_c, flask_c, chamber, timestamp, calculate_mean_intensities(snippet_path_c))
+
