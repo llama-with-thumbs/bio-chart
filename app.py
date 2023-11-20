@@ -11,7 +11,7 @@ from calculate_mean_intensities import calculate_mean_intensities
 import os
 import re
 
-folder_path = "captured_images/A"
+folder_path = "captured_images/B"
 
 
 
@@ -52,7 +52,7 @@ for root, dirs, files in os.walk(folder_path):
             iso_format_date = date_time_obj.isoformat()
             print(f"ISO Format Date: {iso_format_date}")
 
-            upload_snippet_to_firebase(file_path, flask_a, chamber, iso_format_date, calculate_mean_intensities(file_path))
+            upload_snippet_to_firebase(file_path, flask_b, chamber, iso_format_date, calculate_mean_intensities(file_path))
 
 # while True:
 #     # Capture an image and get its path
