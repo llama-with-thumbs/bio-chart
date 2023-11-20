@@ -11,7 +11,7 @@ from calculate_mean_intensities import calculate_mean_intensities
 import os
 import re
 
-folder_path = "captured_images\\A"
+folder_path = "captured_images/A"
 
 
 
@@ -25,19 +25,19 @@ coordinates_c = [1700, 868 ,425 ,530]
 rotation_angle = 0  # Rotation angle in degrees
 
 # Define chamber name
-chamber = "CHA-18E9A7"
+chamber = "CHA-18E9A6"
 
 # Define flasks names
 flask_a = "FLA-99606"
 flask_b = "FLA-6A7F0"
 flask_c = "FLA-5B4CD"
 
-
+print(f"befor for sicle")
 
 # Iterate through the folder
 for root, dirs, files in os.walk(folder_path):
     for i, file_name in enumerate(files, start=1):
-        if i % 38 == 0:
+        if i % 400 == 0:
             file_path = os.path.join(root, file_name)
 
             # Define the regular expression pattern to match the date
