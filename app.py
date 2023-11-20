@@ -25,7 +25,7 @@ coordinates_c = [1700, 868 ,425 ,530]
 rotation_angle = 0  # Rotation angle in degrees
 
 # Define chamber name
-chamber = "CHA-18E9A6"
+chamber = "CHA-18E9A7"
 
 # Define flasks names
 flask_a = "FLA-99606"
@@ -50,6 +50,7 @@ for root, dirs, files in os.walk(folder_path):
 
             # Convert the datetime object to ISO format
             iso_format_date = date_time_obj.isoformat()
+            print(f"ISO Format Date: {iso_format_date}")
 
             upload_snippet_to_firebase(file_path, flask_a, chamber, iso_format_date, calculate_mean_intensities(file_path))
 
