@@ -11,7 +11,7 @@ from calculate_mean_intensities import calculate_mean_intensities
 import os
 import re
 
-folder_path = "captured_images/B"
+folder_path = "captured_images/C"
 
 # Define the coordinates for cropping
 # x, y, width, height
@@ -56,7 +56,7 @@ for i, (date_time_obj, file_path) in enumerate(file_date_pairs, start=1):
     if i % 40 == 0:
         iso_format_date = date_time_obj.isoformat()
         print(f"Path of the {i}th file: {file_path}, ISO Format Date: {iso_format_date}")
-        upload_snippet_to_firebase(file_path, flask_b, chamber, iso_format_date, calculate_mean_intensities(file_path))
+        upload_snippet_to_firebase(file_path, flask_c, chamber, iso_format_date, calculate_mean_intensities(file_path))
 
 # while True:
 #     # Capture an image and get its path
