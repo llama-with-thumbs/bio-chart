@@ -11,7 +11,7 @@ from calculate_mean_intensities import calculate_mean_intensities
 import os
 import re
 
-folder_path = "captured_images\A"
+folder_path = "captured_images/A"
 
 # Define the coordinates for cropping
 # x, y, width, height
