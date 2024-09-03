@@ -4,25 +4,23 @@ import os
 import sys
 from PIL import Image, ImageDraw, ImageFont
 from datetime import datetime
+import re
 
 def extract_date_time_from_filename(filename):
-    try:
-        # Assuming the filename follows a specific pattern, such as "cropped_captured_image_YYYY-MM-DD_HH-MM-SS.ext"
-        parts = filename.split("_")
-        
-        if len(parts) >= 4:
-            date_str = parts[-2]
-            time_str = parts[-1].split(".")[0]
-            
-            datetime_str = f"{date_str} {time_str}"
-            
-            # Convert the extracted date and time to a datetime object
-            return datetime.strptime(datetime_str, "%Y-%m-%d %H-%M-%S")
-        
-    except Exception as e:
-        print(f"An error occurred while extracting date and time: {str(e)}")
-
-    # Default to the current date and time if extraction fails
+    # match = re.search(r"\d{4}-\d{2}-\d{2}T\d{2}_\d{2}_\d{2}\.\d+", filename)
+    # if not match:
+    #     raise ValueError("No timestamp found")
+    # return datetime.strptime(match.group(0).replace('_', ':'), "%Y-%m-%dT%H:%M:%S.%f")
+    datetime_str = filename.split("_")[-1].split(".")[0]
+    
+    # Attempt parsing with and without fractional seconds
+    for fmt in ("%Y-%m-%dT%H:%M:%S.%f", "%Y-%m-%dT%H:%M:%S"):
+        try:
+            return datetime.strptime(datetime_str, fmt)
+        except ValueError:
+            continue
+    
+    print(f"Error: time data '{datetime_str}' does not match expected format")
     return datetime.now()
 
 def create_gif_from_images(input_folder, output_gif, width, duration, skip):
@@ -76,8 +74,7 @@ def create_gif_from_images(input_folder, output_gif, width, duration, skip):
 
             # Create a drawing context and font
             draw = ImageDraw.Draw(img_resized)
-            font = ImageFont.truetype("arial.ttf", size=20)  # You may need to specify a valid font file
-
+            font = ImageFont.truetype("DejaVuSans.ttf", 20)  # Ensure the font is available on your system
             # Position and text color for the hours annotation
             position = (10, 10)
             text_color = (255, 255, 255)
