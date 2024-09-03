@@ -47,8 +47,8 @@ for root, dirs, files in os.walk(folder_path):
             file_date_pairs.append((date_time_obj, file_path))
 
     # do it only evey 12 houres.
-    upload_gif_file(f"output_gif_folder/{flask_b}.gif", chamber, flask_b)
-    upload_gif_file(f"output_gif_folder/{flask_c}.gif", chamber, flask_c)
+    # upload_gif_file(f"output_gif_folder/{flask_b}.gif", chamber, flask_b)
+    # upload_gif_file(f"output_gif_folder/{flask_c}.gif", chamber, flask_c)
 
     # # Call the cut_and_save_rectangle function for each image
     snippet_path_b = cut_and_save_snippet(image_path, coordinates_b, flask_b, chamber)
