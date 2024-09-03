@@ -25,7 +25,7 @@ chamber = "CHA-18E9A6"
 
 # Define flasks names
 flask_b = "SMP-388D43"
-flask_c = "FLA-12D189"
+flask_c = "SMP-12D189"
 
 while True:
     # Capture an image and get its path
