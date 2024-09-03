@@ -9,10 +9,8 @@ from datetime import datetime
 from calculate_mean_intensities import calculate_mean_intensities
 from upload_gif_file import upload_gif_file
 
-import os
-import re
-
-folder_path = "captured_images/C"
+# Define the interval in seconds (30 minutes)
+interval_seconds = 30 * 60  # 30 minutes * 60 seconds/minute
 
 # Define the coordinates for cropping
 # x, y, width, height
@@ -29,22 +27,15 @@ chamber = "CHA-18E9A6"
 flask_b = "SMP-A0018B"
 flask_c = "FLA-5B4CD"
 
-# Define the regular expression pattern to match the date
-pattern = re.compile(r"\d{4}-\d{2}-\d{2}_\d{2}-\d{2}-\d{2}")
+while True:
+    # Capture an image and get its path
+    timestamp = datetime.now().isoformat()
 
-# Iterate through the folder
-for root, dirs, files in os.walk(folder_path):
-    for file_name in files:
-        file_path = os.path.join(root, file_name)
+    image_path = capture_image(timestamp)
 
-        # Find the match in the filename
-        match = pattern.search(file_name)
-        if match:
-            date_str = match.group()
-            date_time_obj = datetime.strptime(date_str, "%Y-%m-%d_%H-%M-%S")
+    rotate_image(image_path, rotation_angle)
 
-            # Append the pair to the list
-            file_date_pairs.append((date_time_obj, file_path))
+    upload_raw_image(image_path, chamber, timestamp)
 
     # do it only evey 12 houres.
     # upload_gif_file(f"output_gif_folder/{flask_b}.gif", chamber, flask_b)
