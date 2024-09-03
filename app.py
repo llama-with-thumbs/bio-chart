@@ -20,18 +20,6 @@ coordinates_b = [1200, 798, 425, 530]
 coordinates_c = [1700, 868 ,425 ,530]
 
 # Define the rotation angle
-<<<<<<< HEAD
-rotation_angle = 0  # Rotation angle in degrees
-
-# Define chamber name
-chamber = "CHA-18E9A6"
-
-# Define flasks names
-flask_a = "FLA-99606"
-flask_b = "FLA-6A7F0"
-flask_c = "FLA-5B4CD"
-file_date_pairs = []  # List to store date-time and file path pairs
-=======
 rotation_angle = 180  # Rotation angle in degrees
 
 # Define chamber name
@@ -40,7 +28,6 @@ chamber = "CHA-8BEA5D1"
 # Define flasks names
 flask_b = "SMP-A0018B"
 flask_c = "FLA-5B4CD"
->>>>>>> master
 
 # Define the regular expression pattern to match the date
 pattern = re.compile(r"\d{4}-\d{2}-\d{2}_\d{2}-\d{2}-\d{2}")
@@ -59,41 +46,6 @@ for root, dirs, files in os.walk(folder_path):
             # Append the pair to the list
             file_date_pairs.append((date_time_obj, file_path))
 
-<<<<<<< HEAD
-# Sort the pairs based on time
-file_date_pairs.sort(key=lambda pair: pair[0])
-
-# Print sorted pairs
-for i, (date_time_obj, file_path) in enumerate(file_date_pairs, start=1):
-    if i % 40 == 0:
-        iso_format_date = date_time_obj.isoformat()
-        print(f"Path of the {i}th file: {file_path}, ISO Format Date: {iso_format_date}")
-        upload_snippet_to_firebase(file_path, flask_c, chamber, iso_format_date, calculate_mean_intensities(file_path))
-
-# while True:
-#     # Capture an image and get its path
-#     timestamp = datetime.now().isoformat()
-
-#     image_path = capture_image(timestamp)
-
-#     rotate_image(image_path, rotation_angle)
-
-#     upload_raw_image(image_path, chamber, timestamp)
-
-#     # # Call the cut_and_save_rectangle function for each image
-#     snippet_path_a = cut_and_save_snippet(image_path, coordinates_a, flask_a, chamber)
-#     snippet_path_b = cut_and_save_snippet(image_path, coordinates_b, flask_b, chamber)
-#     snippet_path_c = cut_and_save_snippet(image_path, coordinates_c, flask_c, chamber)
-
-#     # update_latest_image(image_path_a)
-#     # update_latest_image(image_path_b)
-#     # update_latest_image(image_path_c)
-
-#     upload_snippet_to_firebase(snippet_path_a, flask_a, chamber, timestamp, calculate_mean_intensities(snippet_path_a))
-#     upload_snippet_to_firebase(snippet_path_b, flask_b, chamber, timestamp, calculate_mean_intensities(snippet_path_b))
-#     upload_snippet_to_firebase(snippet_path_c, flask_c, chamber, timestamp, calculate_mean_intensities(snippet_path_c))
-
-=======
     # do it only evey 12 houres.
     upload_gif_file(f"output_gif_folder/{flask_b}.gif", chamber, flask_b)
     upload_gif_file(f"output_gif_folder/{flask_c}.gif", chamber, flask_c)
@@ -107,4 +59,3 @@ for i, (date_time_obj, file_path) in enumerate(file_date_pairs, start=1):
 
 
     time.sleep(interval_seconds)
->>>>>>> master
