@@ -14,18 +14,18 @@ interval_seconds = 30 * 60  # 30 minutes * 60 seconds/minute
 
 # Define the coordinates for cropping
 # x, y, width, height
-coordinates_b = [1200, 798, 425, 530]
-coordinates_c = [1700, 868 ,425 ,530]
+coordinates_b = [500, 150, 525, 760]
+coordinates_c = [1350, 150 ,525, 760]
 
 # Define the rotation angle
-rotation_angle = 180  # Rotation angle in degrees
+rotation_angle = -2.5  # Rotation angle in degrees
 
 # Define chamber name
 chamber = "CHA-18E9A6"
 
 # Define flasks names
-flask_b = "SMP-A0018B"
-flask_c = "FLA-5B4CD"
+flask_b = "SMP-388D43"
+flask_c = "FLA-12D189"
 
 while True:
     # Capture an image and get its path
