@@ -2,6 +2,7 @@ import firebase_admin
 from firebase_admin import credentials, firestore, storage
 import os
 from calculate_green_object_area import calculate_green_object_area
+from calculate_object_perimeter_path import calculate_object_perimeter_path
 
 def download_image(blob_path, local_directory="downloaded_images"):
     try:
@@ -26,7 +27,7 @@ def download_image(blob_path, local_directory="downloaded_images"):
         print(f"Error downloading image from {blob_path}: {e}")
         return None
 
-def add_area_to_snippets():
+def add_area_and_perimeter_to_snippets():
     try:
         # Initialize Firebase if not already done
         if not firebase_admin._apps:
@@ -35,8 +36,8 @@ def add_area_to_snippets():
 
         # Firestore reference
         db = firestore.client()
-        snippets_ref = db.collection('bio-chart').document('CHA-8BEA5D1') \
-            .collection('flasks').document('SMP-9414B8').collection('snippets')
+        snippets_ref = db.collection('bio-chart').document('CHA-18E9A6') \
+            .collection('flasks').document('SMP-388D43').collection('snippets')
 
         # Fetch and process documents
         for doc in snippets_ref.stream():
@@ -46,11 +47,16 @@ def add_area_to_snippets():
                 if local_image_path:
                     # Calculate green object area using the downloaded image
                     area = calculate_green_object_area(local_image_path)
+                    perimeter_path = calculate_object_perimeter_path(local_image_path)
                     print(f"Calculated area: {area}")
+                    print(f"Calculated perimeter path: {perimeter_path}")
                     
-                    # Update the document with the calculated object_area
-                    snippets_ref.document(doc.id).update({"object_area": area})
-                    print(f"Updated document {doc.id} with object_area: {area}")
+                    # Update the document with both calculated object_area and object_perimeter
+                    snippets_ref.document(doc.id).update({
+                        "object_area": area,
+                        "object_perimeter": perimeter_path
+                    })
+                    print(f"Updated document {doc.id} with object_area: {area} and object_perimeter")
                 else:
                     print(f"Failed to download image for document {doc.id}")
             else:
@@ -60,4 +66,4 @@ def add_area_to_snippets():
         print(f"Error processing snippets: {e}")
 
 # Run the function
-add_area_to_snippets()
+add_area_and_perimeter_to_snippets()
