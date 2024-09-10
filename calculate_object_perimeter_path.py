@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-import matplotlib.pyplot as plt
+import json
 
 def calculate_object_perimeter_path(image_path='test.jpg', epsilon_factor=0.005):
     # Load the image from the given path or use 'test.jpg' by default
@@ -31,23 +31,16 @@ def calculate_object_perimeter_path(image_path='test.jpg', epsilon_factor=0.005)
         epsilon = epsilon_factor * cv2.arcLength(contour, True)  # Smaller epsilon_factor for less approximation
         approx = cv2.approxPolyDP(contour, epsilon, True)  # Approximate the contour
 
-        # Extract the simplified (x, y) coordinates
+        # Extract the simplified (x, y) coordinates and store them as a list of lists
         for point in approx:
             x, y = point[0]  # Extract x and y coordinates
-            path.append((x, y))
+            path.append([int(x), int(y)])  # Convert to list of lists
 
-        # Optionally: Draw the simplified perimeter path on the original image for visualization
-        cv2.drawContours(image, [approx], -1, (255, 0, 0), 2)  # Blue color for the perimeter
-
-    # Show the image with the simplified perimeter (for visual debugging)
-    cv2.imshow('Less Approximate Green Object Perimeter', image)
-    
-    # Wait for a key press and close the window
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
-
-    return path  # Return the list of simplified contour points as the path
+    # Convert the list of lists to a JSON-like string for Firestore
+    path_as_string = json.dumps(path)
+    return path_as_string  # Return the JSON string
 
 
 # Example usage:
 perimeter_path = calculate_object_perimeter_path()
+print(perimeter_path)

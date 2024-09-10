@@ -4,6 +4,9 @@ import os
 from calculate_green_object_area import calculate_green_object_area
 from calculate_object_perimeter_path import calculate_object_perimeter_path
 
+chamber = "CHA-8BEA5D1"
+flask = "SMP-9414B8"
+
 def download_image(blob_path, local_directory="downloaded_images"):
     try:
         # Ensure local directory exists
@@ -36,8 +39,8 @@ def add_area_and_perimeter_to_snippets():
 
         # Firestore reference
         db = firestore.client()
-        snippets_ref = db.collection('bio-chart').document('CHA-18E9A6') \
-            .collection('flasks').document('SMP-388D43').collection('snippets')
+        snippets_ref = db.collection('bio-chart').document(chamber) \
+            .collection('flasks').document(flask).collection('snippets')
 
         # Fetch and process documents
         for doc in snippets_ref.stream():
