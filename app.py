@@ -26,9 +26,9 @@ rotation_angle = 1.5  # Rotation angle in degrees
 chamber = "CHA-AFBEFC"
 
 # Define flasks names
-flask_a = "SMP-7E6827"
-flask_b = "SMP-29C14C"
-flask_c = "SMP-8CDE9E"
+flask_a = "FLA-7E6827"
+flask_b = "FLA-29C14C"
+flask_c = "FLA-8CDE9E"
 
 while True:
     timestamp = datetime.now().isoformat()
@@ -53,8 +53,8 @@ while True:
     create_gif_from_images(f"{chamber}/{flask_c}", f"{flask_c}.gif", 200, 0.1, 10)
 
 
-    upload_gif_file(f"output_gif_folder/{flask_a}.gif", chamber, flask_a)
-    upload_gif_file(f"output_gif_folder/{flask_b}.gif", chamber, flask_b)
-    upload_gif_file(f"output_gif_folder/{flask_c}.gif", chamber, flask_c)
+    # upload_gif_file(f"output_gif_folder/{flask_a}.gif", chamber, flask_a)
+    # upload_gif_file(f"output_gif_folder/{flask_b}.gif", chamber, flask_b)
+    # upload_gif_file(f"output_gif_folder/{flask_c}.gif", chamber, flask_c)
 
     time.sleep(interval_seconds)
