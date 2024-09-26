@@ -7,21 +7,19 @@ from datetime import datetime
 import re
 
 def extract_date_time_from_filename(filename):
-    # match = re.search(r"\d{4}-\d{2}-\d{2}T\d{2}_\d{2}_\d{2}\.\d+", filename)
-    # if not match:
-    #     raise ValueError("No timestamp found")
-    # return datetime.strptime(match.group(0).replace('_', ':'), "%Y-%m-%dT%H:%M:%S.%f")
-    datetime_str = filename.split("_")[-1].split(".")[0]
-    
-    # Attempt parsing with and without fractional seconds
-    for fmt in ("%Y-%m-%dT%H:%M:%S.%f", "%Y-%m-%dT%H:%M:%S"):
-        try:
-            return datetime.strptime(datetime_str, fmt)
-        except ValueError:
-            continue
-    
+    try:
+        datetime_str = filename.split("_")[-1].split(".")[0]
+        # Attempt parsing with and without fractional seconds
+        for fmt in ("%Y-%m-%dT%H:%M:%S.%f", "%Y-%m-%dT%H:%M:%S"):
+            try:
+                return datetime.strptime(datetime_str, fmt)
+            except ValueError:
+                continue
+    except IndexError:
+        print(f"Error: Unable to extract timestamp from filename '{filename}'")
     print(f"Error: time data '{datetime_str}' does not match expected format")
     return datetime.now()
+
 
 def create_gif_from_images(input_folder, output_gif, width, duration, skip):
     try:
