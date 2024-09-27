@@ -35,7 +35,7 @@ def create_gif_from_images(input_folder, output_gif, width, duration, skip):
 
         # List all image files in the folder
         image_files = [f for f in os.listdir(input_folder) if f.endswith((".png", ".jpg", ".jpeg", ".gif"))]
-
+        print(image_file)
         # Sort image files by name to maintain order
         image_files.sort()
 
