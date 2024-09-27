@@ -4,7 +4,6 @@ import os
 import sys
 from PIL import Image, ImageDraw, ImageFont
 from datetime import datetime
-import re
 
 def extract_date_time_from_filename(filename):
     datetime_str = filename.split("_")[-1].split(".")[0]
@@ -19,6 +18,14 @@ def extract_date_time_from_filename(filename):
     print(f"Error: time data '{datetime_str}' does not match expected format")
     return datetime.now()
 
+def create_empty_gif(output_path, width, height, duration):
+    # Create a blank white image
+    blank_image = Image.new("RGB", (width, height), (255, 255, 255))
+    
+    # Save it as a GIF with the given duration
+    blank_image.save(output_path, save_all=True, append_images=[], duration=int(duration * 1000), loop=0)
+    print(f"Empty GIF created and saved as {output_path}.")
+
 def create_gif_from_images(input_folder, output_gif, width, duration, skip):
     try:
         # Check if the input folder exists
@@ -28,16 +35,6 @@ def create_gif_from_images(input_folder, output_gif, width, duration, skip):
 
         # List all image files in the folder
         image_files = [f for f in os.listdir(input_folder) if f.endswith((".png", ".jpg", ".jpeg", ".gif"))]
-
-        # Check if there are any .gif files specifically
-        gif_files = [f for f in os.listdir(input_folder) if f.endswith(".gif")]
-
-        if not image_files:
-            print("No image files found in the folder.")
-            return
-
-        if not gif_files:
-            raise FileNotFoundError("No GIF files found in the input folder.")
 
         # Sort image files by name to maintain order
         image_files.sort()
@@ -93,13 +90,16 @@ def create_gif_from_images(input_folder, output_gif, width, duration, skip):
         # Create the output folder if it doesn't exist
         os.makedirs(output_folder, exist_ok=True)
 
-        # Save the images as a GIF in the output folder with the specified duration
-        output_gif_path = os.path.join(output_folder, output_gif)
-        images[0].save(output_gif_path, save_all=True, append_images=images[1:], duration=int(duration * 1000), loop=0)
+        # If there are no images, create an empty GIF
+        if not images:
+            output_gif_path = os.path.join(output_folder, output_gif)
+            create_empty_gif(output_gif_path, width, 100, duration)
+        else:
+            # Save the images as a GIF in the output folder with the specified duration
+            output_gif_path = os.path.join(output_folder, output_gif)
+            images[0].save(output_gif_path, save_all=True, append_images=images[1:], duration=int(duration * 1000), loop=0)
+            print(f"GIF created and saved as {output_gif_path} with a duration of {duration} seconds.")
 
-        print(f"GIF created and saved as {output_gif_path} with a duration of {duration} seconds.")
-    except FileNotFoundError as fnf_error:
-        print(f"An error occurred: {str(fnf_error)}")
     except Exception as e:
         print(f"An error occurred: {str(e)}")
 
