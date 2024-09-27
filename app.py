@@ -53,8 +53,8 @@ while True:
     create_gif_from_images(f"{chamber}/{flask_c}", f"{flask_c}.gif", 200, 0.1, 10)
 
 
-    # upload_gif_file(f"output_gif_folder/{flask_a}.gif", chamber, flask_a)
-    # upload_gif_file(f"output_gif_folder/{flask_b}.gif", chamber, flask_b)
-    # upload_gif_file(f"output_gif_folder/{flask_c}.gif", chamber, flask_c)
+    upload_gif_file(f"output_gif_folder/{flask_a}.gif", chamber, flask_a)
+    upload_gif_file(f"output_gif_folder/{flask_b}.gif", chamber, flask_b)
+    upload_gif_file(f"output_gif_folder/{flask_c}.gif", chamber, flask_c)
 
     time.sleep(interval_seconds)
