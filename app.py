@@ -48,9 +48,9 @@ while True:
     upload_snippet_to_firebase(snippet_path_b, flask_b, chamber, timestamp, calculate_mean_intensities(snippet_path_b), calculate_green_object_area(snippet_path_b))
     upload_snippet_to_firebase(snippet_path_c, flask_c, chamber, timestamp, calculate_mean_intensities(snippet_path_c), calculate_green_object_area(snippet_path_c))
 
-    create_gif_from_images(f"{chamber}/{flask_a}", f"{flask_a}.gif", 200, 0.1, 10)
-    create_gif_from_images(f"{chamber}/{flask_b}", f"{flask_b}.gif", 200, 0.1, 10)
-    create_gif_from_images(f"{chamber}/{flask_c}", f"{flask_c}.gif", 200, 0.1, 10)
+    create_gif_from_images(f"{chamber}/{flask_a}", f"{flask_a}.gif", 200, 0.1, 1)
+    create_gif_from_images(f"{chamber}/{flask_b}", f"{flask_b}.gif", 200, 0.1, 1)
+    create_gif_from_images(f"{chamber}/{flask_c}", f"{flask_c}.gif", 200, 0.1, 1)
 
 
     upload_gif_file(f"output_gif_folder/{flask_a}.gif", chamber, flask_a)
