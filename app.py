@@ -15,10 +15,10 @@ interval_seconds = 10 * 60  # 30 minutes * 60 seconds/minute
 
 # Define the coordinates for cropping
 # x, y, width, height
-coordinates_a = [530, 568, 425, 480]
+coordinates_a = [100, 100, 2392, 1820]
 
 # Define the rotation angle
-rotation_angle = 1.5  # Rotation angle in degrees
+rotation_angle = 0  # Rotation angle in degrees
 
 # Define chamber name
 chamber = "CHA-DDFBE6"
