@@ -11,7 +11,9 @@ def capture_image(timestamp, output_directory='captured_images'):
         image_filename = f"captured_image_{timestamp}.jpg"
         image_path = os.path.join(output_directory, image_filename)
 
-        subprocess.run(["fswebcam", "-r", "2592x1944", "--no-banner", "--set", "brightness=50%", image_path])
+        # subprocess.run(["fswebcam", "-r", "2592x1944", "--no-banner", "--set", "brightness=50%", image_path])
+        subprocess.run(["libcamera-still", "-o", image_path, "-n", "--width", "2592", "--height", "1944", "--brightness", "0.5"], check=True)
+
 
         # Return the path of the captured image
         return image_path
