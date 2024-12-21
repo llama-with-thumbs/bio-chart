@@ -23,7 +23,7 @@ def create_empty_gif(output_path, width, height, duration):
     blank_image = Image.new("RGB", (width, height), (255, 255, 255))
     
     # Save it as a GIF with the given duration
-    blank_image.save(output_path, save_all=True, append_images=[], duration=int(duration * 100), loop=0)
+    blank_image.save(output_path, save_all=True, append_images=[], duration=int(duration * 1000), loop=0)
     
     print(f"Empty GIF created and saved as {output_path}.")
 
