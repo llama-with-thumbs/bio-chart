@@ -4,7 +4,6 @@ import os
 import sys
 from PIL import Image, ImageDraw, ImageFont
 from datetime import datetime
-from PIL import Image, ImageEnhance
 
 def extract_date_time_from_filename(filename):
     datetime_str = filename.split("_")[-1].split(".")[0]
@@ -24,8 +23,8 @@ def create_empty_gif(output_path, width, height, duration):
     blank_image = Image.new("RGB", (width, height), (255, 255, 255))
     
     # Save it as a GIF with the given duration
-    ImageEnhance.Contrast(ImageEnhance.Brightness(Image.open('path_to_image')).enhance(1.2)).enhance(1.5).save(output_path, save_all=True, append_images=[], duration=int(duration * 1000), loop=0)
-
+    blank_image.save(output_path, save_all=True, append_images=[], duration=int(duration * 100), loop=0)
+    
     print(f"Empty GIF created and saved as {output_path}.")
 
 def create_gif_from_images(input_folder, output_gif, width, duration, skip):
