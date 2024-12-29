@@ -24,7 +24,7 @@ rotation_angle = 0  # Rotation angle in degrees
 chamber = "CHA-DDFBE6"
 
 # Define flasks names
-flask_a = "SMP-4FF31C"
+flask_a = "SMP-EADA67"
 
 while True:
     timestamp = datetime.now().isoformat()
