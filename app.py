@@ -16,6 +16,7 @@ interval_seconds = 10 * 60  # 30 minutes * 60 seconds/minute
 # Define the coordinates for cropping
 # x, y, width, height
 coordinates_a = [100, 100, 2392, 1820]
+coordinates_b = [1000, 650, 425, 530]
 
 # Define the rotation angle
 rotation_angle = 0  # Rotation angle in degrees
@@ -25,6 +26,7 @@ chamber = "CHA-DDFBE6"
 
 # Define flasks names
 flask_a = "SMP-EADA67"
+flask_b = "SMP-3ACFBA"
 
 while True:
     timestamp = datetime.now().isoformat()
@@ -37,11 +39,18 @@ while True:
 
     # # Call the cut_and_save_rectangle function for each image
     snippet_path_a = cut_and_save_snippet(image_path, coordinates_a, flask_a, chamber)
+    snippet_path_b = cut_and_save_snippet(image_path, coordinates_b, flask_b, chamber)
+
 
     upload_snippet_to_firebase(snippet_path_a, flask_a, chamber, timestamp, calculate_mean_intensities(snippet_path_a), calculate_green_object_area(snippet_path_a))
-  
+    upload_snippet_to_firebase(snippet_path_b, flask_b, chamber, timestamp, calculate_mean_intensities(snippet_path_b), calculate_green_object_area(snippet_path_a))
+
     create_gif_from_images(f"{chamber}/{flask_a}", f"{flask_a}.gif", 200, 0.1, 1)
+    create_gif_from_images(f"{chamber}/{flask_b}", f"{flask_b}.gif", 200, 0.1, 1)
+
     
     upload_gif_file(f"output_gif_folder/{flask_a}.gif", chamber, flask_a)
+    upload_gif_file(f"output_gif_folder/{flask_b}.gif", chamber, flask_b)
+
    
     time.sleep(interval_seconds)
