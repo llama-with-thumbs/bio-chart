@@ -6,8 +6,8 @@ from calculate_intersection_mask_and_area import calculate_intersection_mask_and
 from calculate_object_perimeter_path import calculate_object_perimeter_path_from_mask
 import cv2
 
-chamber = "CHA-18E9A6"
-flask = "SMP-12D189"
+chamber = "CHA-146658"
+flask = "SMP-96A579"
 
 def download_image_if_needed(blob_path, local_directory=f"{flask}_downloaded_images"):
     try:
